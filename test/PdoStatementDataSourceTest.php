@@ -22,8 +22,8 @@
 
 namespace EldnpTest\Export\DataSource\Pdo;
 
+use Eldnp\Export\DataSource\Pdo\Exception\LogicException;
 use Eldnp\Export\DataSource\Pdo\PdoStatementDataSource;
-use LogicException;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 
