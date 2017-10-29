@@ -1,0 +1,57 @@
+{
+    "name": "eldnp/export.data-source.pdo",
+    "type": "library",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Oleg Verevskoy",
+            "email": "verevskoy@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev",
+            "dev-develop": "0.2-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Eldnp\\Export\\DataSource\\Pdo\\": "lib/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EldnpTest\\Export\\DataSource\\Pdo\\": "test/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:eldnp/export"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:eldnp/export.map.git"
+        }
+    ],
+    "require": {
+        "php": "^5.3",
+        "eldnp/export": "^0.1",
+        "eldnp/export.map": "^0.1",
+        "ext-pdo": "*"
+    },
+    "require-dev": {
+        "phpunit/PHPUnit": "^4.8",
+        "zendframework/zend-coding-standard": "~1.0.0"
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@test"
+        ],
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit --colors=always --coverage-text"
+    }
+}
