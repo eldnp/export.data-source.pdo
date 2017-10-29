@@ -1,0 +1,34 @@
+<?php
+/*
+ * This file is part of Eldnp/export.data-source.pdo.
+ *
+ * Eldnp/export.data-source.pdo is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Eldnp/export.data-source.pdo is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Eldnp/export.data-source.pdo.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @see       https://github.com/eldnp/export.data-source.pdo for the canonical source repository
+ * @copyright Copyright (c) 2017 Oleg Verevskoy <verevskoy@gmail.com>
+ * @license   https://github.com/eldnp/export.data-source.pdo/blob/master/LICENSE GNU GENERAL PUBLIC LICENSE Version 3
+ */
+
+namespace Eldnp\Export\DataSource\Pdo\Exception;
+
+use Eldnp\Export\Exception\ExceptionInterface;
+
+/**
+ * Class LogicException
+ *
+ * @package Eldnp\Export\DataSource\Pdo\Exception
+ */
+class LogicException extends \LogicException implements ExceptionInterface
+{
+}
