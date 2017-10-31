@@ -25,19 +25,8 @@
             "EldnpTest\\Export\\DataSource\\Pdo\\": "test/"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:eldnp/export"
-        },
-        {
-            "type": "vcs",
-            "url": "git@github.com:eldnp/export.map.git"
-        }
-    ],
     "require": {
         "php": "^5.3",
-        "eldnp/export": "^0.1",
         "eldnp/export.map": "^0.1",
         "ext-pdo": "*"
     },
@@ -50,8 +39,10 @@
             "@cs-check",
             "@test"
         ],
+        "upload-coverage": "coveralls -v",
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
-        "test": "phpunit --colors=always --coverage-text"
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --coverage-clover clover.xml"
     }
 }

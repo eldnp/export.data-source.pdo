@@ -43,17 +43,7 @@ class PdoStatementDataSourceTest extends TestCase
         $prophecy = $this->prophesize('\PDOStatement');
         $prophecy
             ->__call('fetch', array(Argument::any()))
-            ->will(function () use ($elementsCount) {
-                static $values = null;
-                if (null === $values) {
-                    $values = array();
-                    for ($i = 0; $i < $elementsCount; $i++) {
-                        $values[] = array("field{$i}" => "value{$i}");
-                    }
-                    $values[] = false;
-                }
-                return array_shift($values);
-            })
+            ->will(new Generator($elementsCount))
             ->shouldBeCalled()
         ;
         /** @var \PDOStatement $statement */
