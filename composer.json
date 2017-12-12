@@ -27,7 +27,7 @@
     },
     "require": {
         "php": "^5.3",
-        "eldnp/export.map": "^0.1",
+        "eldnp/export": "^0.1.2",
         "ext-pdo": "*"
     },
     "require-dev": {
