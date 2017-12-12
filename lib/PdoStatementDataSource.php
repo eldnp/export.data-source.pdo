@@ -23,14 +23,14 @@
 namespace Eldnp\Export\DataSource\Pdo;
 
 use Eldnp\Export\DataSource\Pdo\Exception\LogicException;
-use Eldnp\Export\Map\AbstractMapDataSource;
+use Eldnp\Export\DataSourceInterface;
 
 /**
  * Class PdoStatementDataSource
  *
  * @package Eldnp\Export\DataSource\Pdo
  */
-class PdoStatementDataSource extends AbstractMapDataSource
+class PdoStatementDataSource implements DataSourceInterface
 {
     /**
      * @var \PDOStatement
@@ -45,7 +45,7 @@ class PdoStatementDataSource extends AbstractMapDataSource
     private $fetchStyle;
 
     /**
-     * @var array|false
+     * @var mixed|false
      */
     private $rawData;
 
@@ -71,15 +71,7 @@ class PdoStatementDataSource extends AbstractMapDataSource
         $this->fetchStyle = $fetchStyle;
     }
 
-    private function fetchNext()
-    {
-        $this->rawData = $this->statement->fetch($this->fetchStyle);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function currentMap()
+    public function current()
     {
         return $this->rawData;
     }
@@ -89,7 +81,7 @@ class PdoStatementDataSource extends AbstractMapDataSource
      */
     public function next()
     {
-        $this->fetchNext();
+        $this->rawData = $this->statement->fetch($this->fetchStyle);
     }
 
     /**
@@ -121,6 +113,6 @@ class PdoStatementDataSource extends AbstractMapDataSource
         }
 
         $this->allowRewind = false;
-        $this->fetchNext();
+        $this->next();
     }
 }
