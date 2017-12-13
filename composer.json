@@ -11,8 +11,8 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.1-dev",
-            "dev-develop": "0.2-dev"
+            "dev-master": "0.2-dev",
+            "dev-develop": "0.3-dev"
         }
     },
     "autoload": {
@@ -27,7 +27,7 @@
     },
     "require": {
         "php": "^5.3",
-        "eldnp/export.map": "^0.1",
+        "eldnp/export": "^0.1.2",
         "ext-pdo": "*"
     },
     "require-dev": {
@@ -39,10 +39,11 @@
             "@cs-check",
             "@test"
         ],
-        "upload-coverage": "coveralls -v",
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
+        "license-check": "docheader check src/ test/",
         "test": "phpunit --colors=always",
-        "test-coverage": "phpunit --coverage-clover clover.xml"
+        "test-coverage": "phpunit --coverage-clover clover.xml",
+        "upload-coverage": "coveralls -v"
     }
 }

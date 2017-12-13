@@ -1,3 +1,4 @@
+<?php
 /*
  * This file is part of Eldnp/export.data-source.pdo.
  *
@@ -15,6 +16,20 @@
  * along with Eldnp/export.data-source.pdo. If not, see <http://www.gnu.org/licenses/>.
  *
  * @see       https://github.com/eldnp/export.data-source.pdo for the canonical source repository
- * @copyright Copyright (c) %regexp:(20\d{2}-)?20\d{2}% Oleg Verevskoy <verevskoy@gmail.com>
+ * @copyright Copyright (c) 2017 Oleg Verevskoy <verevskoy@gmail.com>
  * @license   https://github.com/eldnp/export.data-source.pdo/blob/master/LICENSE GNU GENERAL PUBLIC LICENSE Version 3
  */
+
+namespace Eldnp\Export\DataSource\Pdo\Exception;
+
+use Eldnp\Export\Exception\ExceptionInterface;
+
+/**
+ * Class RuntimeException
+ *
+ * @package Eldnp\Export\DataSource\Pdo\Exception
+ */
+class RuntimeException extends \RuntimeException implements ExceptionInterface
+{
+
+}
