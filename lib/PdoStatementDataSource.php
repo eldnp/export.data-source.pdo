@@ -9,11 +9,11 @@
  *
  * Eldnp/export.data-source.pdo is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Eldnp/export.data-source.pdo.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Eldnp/export.data-source.pdo. If not, see <http://www.gnu.org/licenses/>.
  *
  * @see       https://github.com/eldnp/export.data-source.pdo for the canonical source repository
  * @copyright Copyright (c) 2017 Oleg Verevskoy <verevskoy@gmail.com>
