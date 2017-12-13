@@ -10,6 +10,7 @@ env:
   global:
     - COMPOSER_ARGS="--no-interaction"
     - COVERAGE_DEPS="satooshi/php-coveralls"
+    - LICENSE_CHECK_DEPS="malukenho/docheader"
 
 matrix:
   include:
@@ -23,6 +24,8 @@ matrix:
     - php: 5.5
       dist: precise
     - php: 5.6
+      env:
+        - LICENSE_CHECK=true
 
 before_install:
   - if [[ $TEST_COVERAGE != 'true' && "$(php --version | grep xdebug -ci)" -ge 1 ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
@@ -31,10 +34,12 @@ before_install:
 install:
   - travis_retry composer install $COMPOSER_ARGS
   - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry composer require --dev $COMPOSER_ARGS $COVERAGE_DEPS ; fi
+  - if [[ $LICENSE_CHECK == 'true' ]]; then travis_retry composer require --dev $COMPOSER_ARGS $LICENSE_CHECK_DEPS ; fi
   - stty cols 120 && composer show
 script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage ; else composer test ; fi
   - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
+  - if [[ $LICENSE_CHECK == 'true' ]]; then composer license-check ; fi
 
 after_script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then composer upload-coverage ; fi
