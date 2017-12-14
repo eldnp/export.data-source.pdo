@@ -41,42 +41,9 @@ class PaginatedDataSourceTest extends TestCase
      */
     private $pdo;
 
-    /**
-     * @param string $query
-     *
-     * @throws \RuntimeException
-     */
-    private function executeQuery($query)
-    {
-        if (false === $this->pdo->exec($query)) {
-            throw new \RuntimeException(sprintf(
-                'An error occurred while running the request. Error: %s. Query: %s',
-                implode(', ', $this->pdo->errorInfo()),
-                $query
-            ));
-        }
-    }
-
     protected function setUp()
     {
-        parent::setUp();
-        $this->pdo = new \PDO("sqlite::memory:");
-        $this->executeQuery(<<< SQL
-create table awesome_table
-(
-  id INT not null primary key,
-  field_one INT not null,
-  field_two INT
-)
-SQL
-        );
-        $maxRows = self::TEST_ROWS_COUNT;
-        for ($i = 1; $i <= $maxRows; $i++) {
-            $this->executeQuery(
-                'insert into awesome_table (id, field_one, field_two) values ' .
-                sprintf('(%d, %d, %s)', $i, rand(0, $maxRows), rand(0, 10) > 3 ? rand(0, $maxRows) : 'null')
-            );
-        }
+        $this->pdo = FixturePdoFactory::factory(self::TEST_ROWS_COUNT);
     }
 
     private function buildDataSource(
