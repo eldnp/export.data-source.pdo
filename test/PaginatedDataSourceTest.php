@@ -20,7 +20,7 @@
  * @license   https://github.com/eldnp/export.data-source.pdo/blob/master/LICENSE GNU GENERAL PUBLIC LICENSE Version 3
  */
 
-namespace EldnpTest\Export\DataSource\Pdo\StatementGenerationStrategy;
+namespace EldnpTest\Export\DataSource\Pdo;
 
 use Eldnp\Export\DataSource\Pdo\Exception\LogicException;
 use Eldnp\Export\DataSource\Pdo\Exception\RuntimeException;
@@ -30,7 +30,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class PaginatedDataSourceTest
  *
- * @package EldnpTest\Export\DataSource\Pdo\StatementGenerationStrategy
+ * @package EldnpTest\Export\DataSource\Pdo
  */
 class PaginatedDataSourceTest extends TestCase
 {
