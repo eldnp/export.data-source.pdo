@@ -24,14 +24,14 @@ namespace Eldnp\Export\DataSource\Pdo;
 
 use Eldnp\Export\DataSource\Pdo\Exception\LogicException;
 use Eldnp\Export\DataSource\Pdo\Exception\RuntimeException;
-use Eldnp\Export\DataSourceInterface;
+use Eldnp\Export\Map\AbstractMapDataSource;
 
 /**
  * Class PaginatedDataSource
  *
  * @package Eldnp\Export\DataSource\Pdo
  */
-class PaginatedDataSource implements DataSourceInterface
+class PaginatedDataSource extends AbstractMapDataSource
 {
     /**
      * @var \PDO
@@ -57,13 +57,6 @@ class PaginatedDataSource implements DataSourceInterface
      * @var int
      */
     private $batchSize;
-
-    /**
-     * @see constants \PDO::FETCH_...
-     *
-     * @var int|null
-     */
-    private $fetchStyle;
 
     /**
      * @var \PDOStatement
@@ -98,16 +91,14 @@ class PaginatedDataSource implements DataSourceInterface
      * @param string $leftPlaceholder
      * @param string $rightPlaceholder
      * @param int $batchSize
-     * @param int|null $fetchStyle
      */
-    public function __construct(\PDO $pdo, $query, $leftPlaceholder, $rightPlaceholder, $batchSize, $fetchStyle = null)
+    public function __construct(\PDO $pdo, $query, $leftPlaceholder, $rightPlaceholder, $batchSize)
     {
         $this->pdo = $pdo;
         $this->query = $query;
         $this->leftPlaceholder = $leftPlaceholder;
         $this->rightPlaceholder = $rightPlaceholder;
         $this->setBatchSize($batchSize);
-        $this->fetchStyle = $fetchStyle;
     }
 
     /**
@@ -169,10 +160,7 @@ class PaginatedDataSource implements DataSourceInterface
         return $statement;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function current()
+    protected function currentMap()
     {
         return $this->currentRawData;
     }
@@ -183,7 +171,7 @@ class PaginatedDataSource implements DataSourceInterface
     public function next()
     {
         $allowNextStatement = true;
-        while (false === $this->currentRawData = $this->currentStatement->fetch($this->fetchStyle)) {
+        while (false === $this->currentRawData = $this->currentStatement->fetch(\PDO::FETCH_ASSOC)) {
             if (!$allowNextStatement) {
                 return;
             }
