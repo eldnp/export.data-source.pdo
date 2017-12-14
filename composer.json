@@ -27,8 +27,8 @@
     },
     "require": {
         "php": "^5.3",
-        "eldnp/export": "^0.1.2",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "eldnp/export.map": "^0.2.1"
     },
     "require-dev": {
         "phpunit/PHPUnit": "^4.8",

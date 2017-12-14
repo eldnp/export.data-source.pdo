@@ -23,41 +23,22 @@
 namespace EldnpTest\Export\DataSource\Pdo;
 
 use Eldnp\Export\DataSource\Pdo\Exception\LogicException;
-use Eldnp\Export\DataSource\Pdo\PdoStatementDataSource;
+use Eldnp\Export\DataSource\Pdo\StatementDataSource;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
 
 /**
  * Class PdoStatementDataSourceTest
  *
  * @package EldnpTest\Export\DataSource\Pdo
  */
-class PdoStatementDataSourceTest extends TestCase
+class StatementDataSourceTest extends TestCase
 {
-    /**
-     * @param int $elementsCount
-     * @return \PDOStatement
-     */
-    private function createStatement($elementsCount)
-    {
-        $prophecy = $this->prophesize('\PDOStatement');
-        $prophecy
-            ->__call('fetch', array(Argument::any()))
-            ->will(new Generator($elementsCount))
-            ->shouldBeCalled()
-        ;
-        /** @var \PDOStatement $statement */
-        $statement = $prophecy->reveal();
-        return $statement;
-    }
-
     public function currentDataProvider()
     {
+        $query = 'select * from awesome_table';
         return array(
-            array($this->createStatement(0), 0),
-            array($this->createStatement(1), 1),
-            array($this->createStatement(2), 2),
-            array($this->createStatement(3), 3),
+            array(FixturePdoFactory::factory(0)->query($query), 0),
+            array(FixturePdoFactory::factory(10)->query($query), 10),
         );
     }
 
@@ -69,7 +50,7 @@ class PdoStatementDataSourceTest extends TestCase
      */
     public function testCurrent(\PDOStatement $statement, $expectedElementsCount)
     {
-        $dataSource = new PdoStatementDataSource($statement);
+        $dataSource = new StatementDataSource($statement);
         $objectsCounter = 0;
         foreach ($dataSource as $key => $value) {
             $objectsCounter++;
@@ -82,11 +63,8 @@ class PdoStatementDataSourceTest extends TestCase
      */
     public function testCurrentExceptionIfRewind()
     {
-        $dataSource = new PdoStatementDataSource($this->createStatement(0));
+        $dataSource = new StatementDataSource(FixturePdoFactory::factory(0)->query('select 1 where 1 != 1'));
         $dataSource->rewind();
-        while ($dataSource->valid()) {
-            $dataSource->next();
-        }
         $dataSource->rewind();
     }
 }
