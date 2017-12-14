@@ -91,7 +91,7 @@ class PaginatedDataSource implements DataSourceInterface
     private $offset = 0;
 
     /**
-     * PreparedStatementStrategy constructor.
+     * PaginatedDataSource constructor.
      *
      * @param \PDO $pdo
      * @param string $query
